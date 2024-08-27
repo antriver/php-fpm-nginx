@@ -7,8 +7,8 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql bcmath && docker-php-ext-enable 
 RUN pecl install timezonedb && docker-php-ext-enable timezonedb
 
 # Add PHP configuration
-COPY config/php/fpm/conf.d/99-php.ini /etc/php/8.3/fpm/conf.d/99-php.ini
-COPY config/php/fpm/pool.d/www.conf /etc/php/8.3/fpm/pool.d/www.conf
+COPY config/php/fpm/conf.d/99-custom.ini /etc/php/8.3/fpm/conf.d/99-custom.ini
+COPY config/php/fpm/pool.d/zzz-custom.conf /usr/local/etc/php-fpm.d/zzz-custom.conf
 
 # Install Nginx
 RUN apt install -y nginx
