@@ -17,5 +17,9 @@ echo "Tagging as version $VERSION"
 # Tag the latest image with the correct version.
 docker image tag antriver/php-fpm-nginx:latest antriver/php-fpm-nginx:$VERSION
 
-# Push the latest versioned images to Docker Hub.
-# TODO
+if [[ ($* == --publish) ]];
+then
+  # Push the latest versioned images to Docker Hub.
+  echo "Publishing antriver/php-fpm-nginx:$VERSION"
+  docker image push antriver/php-fpm-nginx:$VERSION
+fi

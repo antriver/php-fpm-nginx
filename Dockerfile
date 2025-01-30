@@ -7,7 +7,8 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql bcmath && docker-php-ext-enable 
 RUN pecl install timezonedb && docker-php-ext-enable timezonedb
 
 # Add PHP configuration
-COPY config/php/fpm/conf.d/99-custom.ini /usr/local/etc/php/conf.d/99-custom.ini
+COPY config/php/fpm/conf.d/98-defaults.ini /usr/local/etc/php/conf.d/98-defaults.ini
+COPY config/php/fpm/pool.d/zz-defaults.conf /usr/local/etc/php-fpm.d/zz-defaults.conf
 
 # Add Nginx repository (see https://nginx.org/en/linux_packages.html#Debian)
 
@@ -39,9 +40,7 @@ COPY config/nginx/conf.d /etc/nginx/conf.d/
 COPY config/nginx/snippets /etc/nginx/snippets/
 
 # Remove default Nginx server
-# RUN rm /etc/nginx/sites-enabled/default
-
-
+RUN rm -f /etc/nginx/conf.d/default.conf
 
 # Install Supervisor
 RUN apt install -y supervisor
